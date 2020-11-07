@@ -1,0 +1,126 @@
+# Step 1: Symptoms
+def symptoms():  
+    while True:
+        sore_throat=input("Are you having sore throat? (Y/N): ")
+        if sore_throat.lower()=='n' or sore_throat.lower()=='y':
+            if sore_throat.lower() == 'n':
+                sore_throat_status = 'n'
+            else:
+                sore_throat_status = 'y'
+            break 
+        else:
+            print('Not a valid entry, please enter Y/N')
+            sore_throat=input("Are you having a sore throat? (Y/N): ")  
+        
+    while True:
+        dry_cough=input("Are you having a dry cough? (Y/N): ")
+        if dry_cough.lower()=='n' or dry_cough.lower()=='y':
+            if dry_cough.lower() == 'n':
+                dry_cough_status = 'n'
+            else:
+                dry_cough_status = 'y'
+            break 
+        else:
+            print('Not a valid entry, please enter Y/N')
+            dry_cough=input("Are you having a dry cough? (Y/N): ")
+    
+    while True:
+        fever=input("Are you having a fever? (Y/N): ")
+        if fever.lower()=='n' or fever.lower()=='y':
+            if fever.lower() == 'n':
+                fever_status = 'n'
+            else:
+                fever_status = 'y'
+            break
+        else:
+            print('Not a valid entry, please enter Y/N')
+            fever=input("Are you having a fever? (Y/N): ")
+        
+    
+    if sore_throat == 'y' and dry_cough == 'y' and fever == 'y': #add whatever symptoms here
+        print("We recommend you go to the nearest hospital for a swab test")
+        #transition
+        Visited = input('Would you like to see if any locations were visited by a Covid patient? Enter Y to continue: ')
+        if Visited.lower() == 'y':
+            return 'y'
+        
+        else: 
+            print('Have a nice day and stay safe!')
+
+        else:
+            print("We advice that you monitor your condition\nRemember to take your temperature twice daily!")
+            Visited = input('Would you like to see if any locations were visited by a Covid patient? Enter Y to continue: ')
+        if Visited.lower() == 'y':
+            return 'y'
+        else:
+            print('Have a nice day and stay safe!')
+
+import pandas as pd 
+df = pd.read_excel("/Users/muhammadiskandar/Downloads/Covid-Public-SG.xlsx")
+x = df.Location.to_dict()
+print(x.values())
+
+label: 'location'
+Customer_location = input("Enter a location: ")
+if Customer_location in x.values():
+    print("The location has been visited by a positive covid 19 patient")
+else:
+    print("The location is safe")
+
+location=("east","west","north","south","central")
+df = pd.read_csv("/Users/muhammadiskandar/Documents/hospitals&polyclinics.csv")
+df = pd.DataFrame(df, columns = ['Hospital/Polyclinic','Location'])
+hospital_location={'North':[],'South':[],'West':[],'East':[],'Central':[]}
+for index,hospital in df.iterrows():
+    hosp = (hospital.tolist())
+    if hosp[1] == 'North':
+        hospital_location['North'].append(hospital[0])
+    if hosp[1] == 'South':
+        hospital_location['South'].append(hospital[0])
+    if hosp[1] == 'West':
+        hospital_location['West'].append(hospital[0])
+    if hosp[1] == 'East':
+        hospital_location['East'].append(hospital[0])
+    if hosp[1] == 'Central':
+        hospital_location['Central'].append(hospital[0])
+    
+print("East","West","North","South","Central")   
+print("Which of these locations do you stay?") 
+Customer_location = input("Enter a location: ")
+if Customer_location.lower() == "east":
+    print(hospital_location["East"])
+if Customer_location.lower() == "west":
+    print(hospital_location["West"])
+if Customer_location.lower() == "south":
+    print(hospital_location["South"])
+if Customer_location.lower == "north":
+    print(hospital_location["North"])
+if Customer_location.lower == "central":
+    print(hospital_location["Central"])
+
+hospital_numbers={}
+df1 = pd.read_csv("/Users/muhammadiskandar/Documents/hospitals&polyclinics.csv")
+df2 = pd.DataFrame(df1, columns = ['Hospital/Polyclinic','Phone Number'])
+for index,hospital in df2.iterrows():
+    hosp = (hospital.tolist())
+    hospital_numbers[hosp[0]] = hosp[1]
+print("Which hospital would you like to go to?")
+preferred_hosp=input("Enter a hospital:")
+print(hospital_numbers[preferred_hosp.upper()])
+
+booktaxi_input=input("Book taxi for you? Input yes/no and press enter: ")
+while True:
+    if booktaxi_input.lower()=="yes":
+        postalcode=int(input("Please input your current postal code: "))
+        if len(str(postalcode))==6:
+            pickuppoint=input("Please input the pickup point: ")
+            print("Sending a taxi to your location now. Please wear a mask and social distance.")
+            break
+        elif len(str(postalcode))!=6 or ValueError:
+            print("Please input a 6 digit postal code only")
+    elif booktaxi_input.lower()=="no":
+        print("Please visit the hospital ASAP for a swab test. In the meantime, please wear a mask and remember to social distance. Thank you.")
+        break
+    else:
+        print("Please input yes or no only.")
+        break
